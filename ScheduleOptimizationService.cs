@@ -5,8 +5,9 @@ namespace UniversityScheduleOptimization;
 
 public static class ScheduleOptimizationService
 {
-    private const int DayCount = 6;
-    private const int PairCount = 4;
+    // Огр-ние дней и кол-во дней
+    private const int DayCount = 6; // Y
+    private const int PairCount = 4; // X
 
     private readonly record struct DayPattern(int Lectures, int Practices, int Labs)
     {
@@ -30,6 +31,7 @@ public static class ScheduleOptimizationService
         List<DayPattern>? best = null;
         int bestUsedDays = int.MaxValue;
 
+        // Целевая функция
         void Search(int day, int lecturesLeft, int practicesLeft, int labsLeft, List<DayPattern> current)
         {
             if (day == DayCount)
@@ -98,6 +100,7 @@ public static class ScheduleOptimizationService
         for (int lab = 0; lab <= PairCount; lab++)
         {
             int total = l + p + lab;
+            // макс. 4 пары
             if (total <= PairCount)
                 result.Add(new DayPattern(l, p, lab));
         }
